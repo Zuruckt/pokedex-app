@@ -1,4 +1,4 @@
-import { StyleSheet, Text, TextInput, View, Image } from 'react-native';
+import { StyleSheet, Text, TextInput, View, StatusBar, ScrollView, FlatList } from 'react-native';
 import { useFonts } from 'expo-font';
 import { 
   Poppins_400Regular as PoppinsRegular,
@@ -19,6 +19,55 @@ export default function App() {
     uri: "https://ton.twitter.com/i/ton/data/dm/1560064214764503051/1560064208439492609/qa78Ut7I.png"
   };
 
+  const data = [
+    {
+      id: 1,
+      text: '1',
+    },
+    {
+      id: 2,
+      text: '2',
+    },
+    {
+      id: 3,
+      text: '3',
+    },
+    {
+      id: 4,
+      text: '4',
+    },
+    {
+      id: 5,
+      text: '1',
+    },
+    {
+      id: 6,
+      text: '2',
+    },
+    {
+      id: 7,
+      text: '3',
+    },
+    {
+      id: 8,
+      text: '4',
+    },
+    
+  ];
+
+  type item = {
+    id: Number;
+    text: String;
+  }
+
+  const renderItem = (item: item) => {
+    return(
+      <View style={styles.card}>
+        <Text>{item.text}</Text>
+      </View>
+    )
+  }
+
   return (
     <View style={styles.container}>
       <View style={styles.navbar}>
@@ -32,11 +81,19 @@ export default function App() {
         </View>
       </View>
       <View style={styles.searchContainer}>
-        <TextInput style={styles.searchInput} placeholder="Procurar" selectionColor="#808080"></TextInput>
+        <TextInput style={styles.searchInput} defaultValue="aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" placeholder="Procurar" selectionColor="#808080"></TextInput>
       </View>
-      <View style={styles.imageContainer}>
-        <Image source={cu} style={styles.image}></Image>
-      </View>
+
+      
+        <FlatList contentContainerStyle={styles.cardContainer}
+          data={data}
+          renderItem={renderItem}
+          keyExtractor={(item: item) => item.id}
+          numColumns={2}
+          horizontal={false}
+        />
+        
+    
     </View>
   );
 }
@@ -47,7 +104,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#f7f7f7',
     alignItems: 'center',
     paddingHorizontal: 20,
-    paddingVertical: 40,
+    paddingTop: StatusBar.currentHeight,
   },
   navbar : {
     width: '100%',
@@ -56,7 +113,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between'
   },
   brand: {
-    height: 50,
+    flex: 1,
     flexDirection: 'row',
     alignItems: 'center',
   },
@@ -86,23 +143,34 @@ const styles = StyleSheet.create({
     backgroundColor: '#000'
   },
   searchContainer: {
-    marginTop: 12,
+    marginTop: 20,
     width: '100%',
   },
   searchInput: {
-    height: 50,
+    height: 40,
     borderRadius: 20,
     fontSize: 20,
     textAlign: 'center',
     fontFamily: 'Poppins-Regular',
     textAlignVertical: 'center',
+    paddingHorizontal: 20,
     backgroundColor: '#fff',
   },
-  imageContainer: {
+  cardContainer: {
+    backgroundColor: '#da2424',
+    flexDirection: 'row',
+    alignItems: 'flex-start',
+    justifyContent: 'space-between',
+
+    flexBasis: '49.5%',
     height: 100,
+    flex: 1
   },
-  image: {
-    height: 50,
-    width: 50,
-  }
+  card: {
+    width: '41.5%',
+    height: 150,
+    marginHorizontal: 10,
+    marginVertical: 10,
+    backgroundColor: '#74cb48',
+  },
 });
