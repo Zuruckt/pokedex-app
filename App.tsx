@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#f7f7f7',
     alignItems: 'center',
     paddingHorizontal: 20,
-    paddingVertical: 25,
+    paddingVertical: 40,
   },
   navbar : {
     width: '100%',
