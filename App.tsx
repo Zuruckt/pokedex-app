@@ -1,4 +1,4 @@
-import { StyleSheet, Text, TextInput, View, StatusBar, ScrollView, FlatList } from 'react-native';
+import { StyleSheet, Text, TextInput, View, StatusBar, ScrollView, Pressable, Dimensions } from 'react-native';
 import { useFonts } from 'expo-font';
 import { 
   Poppins_400Regular as PoppinsRegular,
@@ -13,59 +13,6 @@ export default function App() {
 
   if (!fontsLoaded) {
     return null;
-  }
-
-  const cu = {
-    uri: "https://ton.twitter.com/i/ton/data/dm/1560064214764503051/1560064208439492609/qa78Ut7I.png"
-  };
-
-  const data = [
-    {
-      id: 1,
-      text: '1',
-    },
-    {
-      id: 2,
-      text: '2',
-    },
-    {
-      id: 3,
-      text: '3',
-    },
-    {
-      id: 4,
-      text: '4',
-    },
-    {
-      id: 5,
-      text: '1',
-    },
-    {
-      id: 6,
-      text: '2',
-    },
-    {
-      id: 7,
-      text: '3',
-    },
-    {
-      id: 8,
-      text: '4',
-    },
-    
-  ];
-
-  type item = {
-    id: Number;
-    text: String;
-  }
-
-  const renderItem = (item: item) => {
-    return(
-      <View style={styles.card}>
-        <Text>{item.text}</Text>
-      </View>
-    )
   }
 
   return (
@@ -83,17 +30,18 @@ export default function App() {
       <View style={styles.searchContainer}>
         <TextInput style={styles.searchInput} defaultValue="aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" placeholder="Procurar" selectionColor="#808080"></TextInput>
       </View>
-
-      
-        <FlatList contentContainerStyle={styles.cardContainer}
-          data={data}
-          renderItem={renderItem}
-          keyExtractor={(item: item) => item.id}
-          numColumns={2}
-          horizontal={false}
-        />
-        
-    
+      <View style={{flex: 1}}>
+        <ScrollView contentContainerStyle={styles.cardContainer}>
+        {
+        Array(200).fill(1).map((_, index: Number) => {
+            return (
+              <View key={'card' + index} style={styles.card}>
+              </View>
+            )
+          })
+        }
+        </ScrollView>
+      </View>    
     </View>
   );
 }
@@ -105,6 +53,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingHorizontal: 20,
     paddingTop: StatusBar.currentHeight,
+    maxHeight: Dimensions.get('screen').height
   },
   navbar : {
     width: '100%',
@@ -161,10 +110,9 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'flex-start',
     justifyContent: 'space-between',
-
     flexBasis: '49.5%',
-    height: 100,
-    flex: 1
+    flexWrap: 'wrap',
+    flexGrow: 4,
   },
   card: {
     width: '41.5%',
