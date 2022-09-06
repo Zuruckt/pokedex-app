@@ -28,9 +28,9 @@ export default function App() {
         </View>
       </View>
       <View style={styles.searchContainer}>
-        <TextInput style={styles.searchInput} defaultValue="aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" placeholder="Procurar" selectionColor="#808080"></TextInput>
+        <TextInput style={styles.searchInput} defaultValue="" placeholder="Procurar" selectionColor="#808080"></TextInput>
       </View>
-      <View style={{flex: 1}}>
+      <View style={styles.scrollContainer}>
         <ScrollView contentContainerStyle={styles.cardContainer}>
         {
         Array(200).fill(1).map((_, index: Number) => {
@@ -105,17 +105,19 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     backgroundColor: '#fff',
   },
+  scrollContainer: {
+    marginTop: 10,
+    flex: 1,
+  },
   cardContainer: {
     backgroundColor: '#da2424',
     flexDirection: 'row',
     alignItems: 'flex-start',
     justifyContent: 'space-between',
-    flexBasis: '49.5%',
     flexWrap: 'wrap',
-    flexGrow: 4,
   },
   card: {
-    width: '41.5%',
+    width: '43.7%',
     height: 150,
     marginHorizontal: 10,
     marginVertical: 10,
