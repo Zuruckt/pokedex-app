@@ -3,24 +3,97 @@ import { PokeCard } from '../../components/PokeCard';
 
 export function Pokedex() {
 
-    const types = ["rock",
-    "ghost",
-    "steel",
-    "water",
-    "grass",
-    "psychic",
-    "ice",
-    "dark",
-    "fairy",
-    "normal",
-    "fighting",
-    "flying",
-    "poison",
-    "ground",
-    "bug",
-    "fire",
-    "electric",
-    "dragon"];
+    const pokemons: Pokemon[] = [
+    {
+        id:
+        name:
+        type: "rock",
+    },
+    {
+        id:
+        name:
+        type: "ghost",
+    },
+    {
+        id:
+        name:
+        type: "steel",
+    },
+    {
+        id:
+        name:
+        type: "water",
+    },
+    {
+        id:
+        name:
+        type: "grass",
+    },
+    {
+        id:
+        name:
+        type: "psychic",
+    },
+    {
+        id:
+        name:
+        type: "ice",
+    },
+    {
+        id:
+        name:
+        type: "dark",
+    },
+    {
+        id:
+        name:
+        type: "fairy",
+    },
+    {
+        id:
+        name:
+        type: "normal",
+    },
+    {
+        id:
+        name:
+        type: "fighting",
+    },
+    {
+        id:
+        name:
+        type: "flying",
+    },
+    {
+        id:
+        name:
+        type: "poison",
+    },
+    {
+        id:
+        name:
+        type: "ground",
+    },
+    {
+        id:
+        name:
+        type: "bug",
+    },
+    {
+        id:
+        name:
+        type: "fire",
+    },
+    {
+        id:
+        name:
+        type: "electric",
+    },
+    {
+        id:
+        name:
+        type: "dragon"],
+    };
 
     return (
         <View style={styles.container}>
