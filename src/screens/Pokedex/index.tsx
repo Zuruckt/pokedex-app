@@ -1,99 +1,22 @@
+import { useEffect, useState } from 'react';
 import { StyleSheet, Text, TextInput, View, StatusBar, ScrollView, Dimensions } from 'react-native';
 import { PokeCard } from '../../components/PokeCard';
+import { fetchPokemon } from '../../services/pokeapi';
 
 export function Pokedex() {
 
-    const pokemons: Pokemon[] = [
-    {
-        id:
-        name:
-        type: "rock",
-    },
-    {
-        id:
-        name:
-        type: "ghost",
-    },
-    {
-        id:
-        name:
-        type: "steel",
-    },
-    {
-        id:
-        name:
-        type: "water",
-    },
-    {
-        id:
-        name:
-        type: "grass",
-    },
-    {
-        id:
-        name:
-        type: "psychic",
-    },
-    {
-        id:
-        name:
-        type: "ice",
-    },
-    {
-        id:
-        name:
-        type: "dark",
-    },
-    {
-        id:
-        name:
-        type: "fairy",
-    },
-    {
-        id:
-        name:
-        type: "normal",
-    },
-    {
-        id:
-        name:
-        type: "fighting",
-    },
-    {
-        id:
-        name:
-        type: "flying",
-    },
-    {
-        id:
-        name:
-        type: "poison",
-    },
-    {
-        id:
-        name:
-        type: "ground",
-    },
-    {
-        id:
-        name:
-        type: "bug",
-    },
-    {
-        id:
-        name:
-        type: "fire",
-    },
-    {
-        id:
-        name:
-        type: "electric",
-    },
-    {
-        id:
-        name:
-        type: "dragon"],
-    };
+    const [pokemons, setPokemons] = useState<Pokemon[]>([]);
+
+    async function definePokemons() {
+        const pokes = Promise.all(Array(20).fill(0).map((_, index) => {
+            return fetchPokemon({search: index+1});
+        })).then(pokemons => setPokemons(pokemons.filter(x => x.id)));    
+    }
+
+    useEffect(() => {
+        definePokemons();
+    }, []);
+    
 
     return (
         <View style={styles.container}>
@@ -113,9 +36,9 @@ export function Pokedex() {
             <View style={styles.scrollContainer}>
                 <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={styles.cardContainer}>
                     {
-                        types.map((value, index: Number) => {
+                        pokemons.map((value: Pokemon, index: Number) => {
                             return (
-                                <PokeCard key={index + 'card'} type={value}/>
+                                <PokeCard key={index + 'card'} pokemon={value}/>
                             )
                         })
                     }
