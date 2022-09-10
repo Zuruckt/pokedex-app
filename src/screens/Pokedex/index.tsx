@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
-import { StyleSheet, Text, TextInput, View, StatusBar, ScrollView, Dimensions } from 'react-native';
+import { StyleSheet, Text, TextInput, View, StatusBar, ScrollView, Dimensions, FlatList } from 'react-native';
+import { Pokemon } from '../../@types';
 import { PokeCard } from '../../components/PokeCard';
 import { fetchPokemon } from '../../services/pokeapi';
 
@@ -34,7 +35,10 @@ export function Pokedex() {
                 <TextInput style={styles.searchInput} defaultValue="" placeholder="Procurar" selectionColor="#808080"></TextInput>
             </View>
             <View style={styles.scrollContainer}>
-                <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={styles.cardContainer}>
+                <FlatList data={pokemons} numColumns={2} renderItem={({item}) => <PokeCard pokemon={item}/>}>
+
+                </FlatList>
+                {/* <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={styles.cardContainer}>
                     {
                         pokemons.map((value: Pokemon, index: Number) => {
                             return (
@@ -42,7 +46,7 @@ export function Pokedex() {
                             )
                         })
                     }
-                </ScrollView>
+                </ScrollView> */}
             </View>
         </View>
     );
