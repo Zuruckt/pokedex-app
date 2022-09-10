@@ -12,6 +12,7 @@
   "dependencies": {
     "@expo-google-fonts/poppins": "^0.2.2",
     "@expo/webpack-config": "^0.17.0",
+    "axios": "^0.27.2",
     "expo": "~46.0.7",
     "expo-font": "~10.2.0",
     "expo-status-bar": "~1.4.0",
