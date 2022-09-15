@@ -55,6 +55,8 @@ export interface Pokemon {
   types: PokemonType[];
   /** Data describing a Pokemon's types in a previous generation. */
   past_types: PokemonPastType[];
+  /** Url to the official artwork sprite */
+  officialArtwork: string;
 }
 
 /**

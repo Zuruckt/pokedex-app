@@ -1,5 +1,5 @@
 import axios, { AxiosError } from "axios";
-import { Pokemon } from "../@types";
+import { NamedAPIResourceList, Pokemon } from "../@types";
 
 const api = axios.create({
     baseURL: 'https://pokeapi.co/api/v2'
@@ -25,11 +25,17 @@ type FetchAllPokemonProps = {
     limit?: number;
 };
 
-export async function fetchAllPokemons({offset, limit, }: FetchAllPokemonProps): Promise<Pokemon[]> {
+export async function fetchAllPokemons({offset = 20, limit = 20 }: FetchAllPokemonProps): Promise<NamedAPIResourceList> {
     try {
-        const response = await api.get(`/pokemon`)
-        return [];
+        const response = await api.get(`/pokemon`, {
+            params: {
+                offset,
+                 limit
+                }
+            }
+        );
+        return response.data;
     } catch (error: AxiosError | any) {
-        return [];
+        return {} as NamedAPIResourceList
     }
 }

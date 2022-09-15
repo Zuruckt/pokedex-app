@@ -23,7 +23,7 @@ export const styles = StyleSheet.create({
     },
     pokemonImageContainer: {
         width: "100%",
-        justifyContent: 'center',
+        justifyContent: "center",
         alignItems: "center"
     },
     pokemonImage: {
@@ -39,8 +39,9 @@ export const styles = StyleSheet.create({
         zIndex: 10000,
     },
     pokemonNameText: {
-        height: '100%',
+        height: "100%",
         color: colors.white,
         textAlignVertical: "center",
+        textTransform: "capitalize",
     }
 });

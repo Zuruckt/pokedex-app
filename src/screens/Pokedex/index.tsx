@@ -2,22 +2,15 @@ import { useEffect, useState } from 'react';
 import { StyleSheet, Text, TextInput, View, StatusBar, ScrollView, Dimensions, FlatList } from 'react-native';
 import { Pokemon } from '../../@types';
 import { PokeCard } from '../../components/PokeCard';
-import { fetchPokemon } from '../../services/pokeapi';
+import { fetchAllPokemons } from '../../services/pokeapi';
 
-export function Pokedex() {
+type Props = {
+    pokemons: Pokemon[];
+}
 
-    const [pokemons, setPokemons] = useState<Pokemon[]>([]);
+export function Pokedex({pokemons}: Props) {
 
-    async function definePokemons() {
-        const pokes = Promise.all(Array(20).fill(0).map((_, index) => {
-            return fetchPokemon({search: index+1});
-        })).then(pokemons => setPokemons(pokemons.filter(x => x.id)));    
-    }
-
-    useEffect(() => {
-        definePokemons();
-    }, []);
-    
+    const [search, setSearch] = useState<string>();
 
     return (
         <View style={styles.container}>
@@ -32,21 +25,10 @@ export function Pokedex() {
                 </View>
             </View>
             <View style={styles.searchContainer}>
-                <TextInput style={styles.searchInput} defaultValue="" placeholder="Procurar" selectionColor="#808080"></TextInput>
+                <TextInput style={styles.searchInput} defaultValue="" placeholder="Procurar" selectionColor="#808080" onChangeText={setSearch}></TextInput>
             </View>
             <View style={styles.scrollContainer}>
-                <FlatList data={pokemons} numColumns={2} renderItem={({item}) => <PokeCard pokemon={item}/>}>
-
-                </FlatList>
-                {/* <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={styles.cardContainer}>
-                    {
-                        pokemons.map((value: Pokemon, index: Number) => {
-                            return (
-                                <PokeCard key={index + 'card'} pokemon={value}/>
-                            )
-                        })
-                    }
-                </ScrollView> */}
+                <FlatList data={search ? pokemons.filter(pokemon => pokemon.name.includes(search) || pokemon.id.toString().includes(search)) : pokemons} numColumns={2} renderItem={({item}) => <PokeCard pokemon={item}/>} />
             </View>
         </View>
     );
@@ -114,6 +96,7 @@ const styles = StyleSheet.create({
     scrollContainer: {
         marginTop: 10,
         flex: 1,
+        width: '100%',
     },
     cardContainer: {
         flexDirection: 'row',
