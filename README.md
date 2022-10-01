@@ -3,7 +3,9 @@ Simple pokedéx app to study React Native
 
 ## Install
 Clone this repo
+
 `npm install` or `yarn install`
+
 `expo start`
 
 ## Design by [Ricardo Schiniegoski](https://www.figma.com/@ricardohs)
