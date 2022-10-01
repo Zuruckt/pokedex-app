@@ -27,7 +27,7 @@ type FetchAllPokemonProps = {
 
 export async function fetchAllPokemons({offset = 20, limit = 20 }: FetchAllPokemonProps): Promise<NamedAPIResourceList> {
     try {
-        const response = await api.get(`/pokemon`, {
+        const response = await api.get('/pokemon', {
             params: {
                 offset,
                  limit
