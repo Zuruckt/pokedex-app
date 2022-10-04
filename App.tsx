@@ -1,12 +1,13 @@
+import { useEffect, useState } from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { ApolloClient, InMemoryCache, gql, ApolloQueryResult } from '@apollo/client';
 import { useFonts } from 'expo-font';
 import { 
   Poppins_400Regular as PoppinsRegular,
   Poppins_700Bold as PoppinsBold,
 } from '@expo-google-fonts/poppins';
+
 import { Pokedex } from './src/screens/Pokedex';
-import { useEffect, useState } from 'react';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import { ApolloClient, InMemoryCache, gql, ApolloQueryResult } from '@apollo/client';
 import { Pokemon } from './src/@types';
 
 export default function App() {
