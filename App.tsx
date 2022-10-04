@@ -6,11 +6,9 @@ import {
 import { Pokedex } from './src/screens/Pokedex';
 import { useEffect, useState } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { ApolloClient, InMemoryCache, ApolloProvider, gql, ApolloQueryResult } from '@apollo/client';
-import { Pokemon, Type } from './src/@types';
+import { ApolloClient, InMemoryCache, gql, ApolloQueryResult } from '@apollo/client';
+import { Pokemon } from './src/@types';
 
-
-type SetMulti = [string, string][];
 export default function App() {
   const [isLoading, setIsLoading] = useState(true);
 
@@ -21,7 +19,7 @@ export default function App() {
 
   const [pokemons, setPokemons] = useState<Pokemon[]>([]);
 
-  async function populateDatabase(offset = 0) {
+  async function populateDatabase() {
 
     const storedPokemons = await AsyncStorage.getItem("pokemons");
 
@@ -63,19 +61,6 @@ export default function App() {
     } else {
       setPokemons(retrievedPokemons);
     }
-    
-
-    // const response = await fetchAllPokemons({limit: 1});
-
-    // setTotal(total +r response.results.length);
-    // Promise.all(response.results.map(async (x) => {
-    //   const response = await axios.get(x.url);
-    //   return [x.name, JSON.stringify(response.data)] as [string, string];
-    // })).then(x => AsyncStorage.multiSet(x).then(() => AsyncStorage.getItem("spearow").then(x => console.log(x))));
-
-    // if(total < 1154) {
-    //   populateDatabase(offset + 20);
-    // }
   }
 
   useEffect(() => {
