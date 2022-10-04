@@ -23,8 +23,6 @@ export default function App() {
   async function populateDatabase() {
 
     const storedPokemons = await AsyncStorage.getItem("pokemons");
-
-    console.log(storedPokemons);
     const retrievedPokemons: Pokemon[] = storedPokemons ? JSON.parse(storedPokemons) : [];
 
     if(!retrievedPokemons?.length) {
@@ -50,16 +48,19 @@ export default function App() {
           }
         `
       }).then((response: ApolloQueryResult<any>) => {
-        const data = response.data.pokemon.map((pokemon: any): Pokemon => {
+        const data = response.data.pokemon.map((pokemon: Pokemon) => {
           return {
             ...pokemon, 
             officialArtwork: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemon.id}.png`};
         }) as Pokemon[];
       
         AsyncStorage.setItem("pokemons", JSON.stringify(data));
+        
+        setIsLoading(false);
         setPokemons(data);
       })
     } else {
+      setIsLoading(false);
       setPokemons(retrievedPokemons);
     }
   }
@@ -72,5 +73,5 @@ export default function App() {
     return null;
   }
   
-  return <Pokedex pokemons={pokemons} />;
+  return <Pokedex pokemons={pokemons} isLoading={isLoading} />;
 }
