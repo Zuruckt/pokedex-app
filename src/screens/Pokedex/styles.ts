@@ -43,7 +43,7 @@ export const styles = StyleSheet.create({
     controlsIcon: {
         width: 15,
         height: 30,
-        backgroundColor: '#000'
+        color: 'red'
     },
     searchContainer: {
         marginTop: 20,
