@@ -1,9 +1,10 @@
 import { useState } from 'react';
-import { Text, TextInput, View, FlatList, ActivityIndicator } from 'react-native';
+import { Text, TextInput, View, FlatList, ActivityIndicator, Image } from 'react-native';
 
 import { Pokemon } from '../../@types';
 import { PokeCard } from '../../components/PokeCard';
 
+import { AntDesign } from '@expo/vector-icons'; 
 import { styles } from "./styles";
 
 type Props = {
@@ -11,9 +12,29 @@ type Props = {
     isLoading?: boolean;
 }
 
+enum SortBy {
+    Id = 1,
+    Name = 2,
+}
+
 export function Pokedex({ pokemons, isLoading }: Props) {
     const [search, setSearch] = useState("");
 
+    const [sortDirection, setSortDirection] = useState(0);
+    const [sortBy, setSortBy] = useState(SortBy.Id)
+
+    function getSortByText() {
+        switch(sortBy) {
+            case SortBy.Id:
+                return <Text>#</Text>;
+            case SortBy.Name:
+                return (<View style={styles.controlsText}>
+                        <Text>A</Text>
+                        <Text>Z</Text>
+                    </View>
+                );
+        }
+    }
     return (
         <View style={styles.container}>
             <View style={styles.navbar}>
@@ -22,8 +43,10 @@ export function Pokedex({ pokemons, isLoading }: Props) {
                     <Text style={styles.title}>Pokédex</Text>
                 </View>
                 <View style={styles.controlsContainer}>
-                    <Text style={styles.controlsText}>#</Text>
-                    <View style={styles.controlsIcon}></View>
+                    <>
+                        {getSortByText()}
+                        <AntDesign name={sortDirection == 0 ? "arrowup" : "arrowdown"} size={24} color="black" onPress={() => setSortDirection(Number(!sortDirection))}/>
+                    </>
                 </View>
             </View>
             <View style={styles.searchContainer}>
